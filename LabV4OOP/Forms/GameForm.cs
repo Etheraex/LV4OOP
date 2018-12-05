@@ -6,33 +6,43 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Poker;
 
 namespace LabV4OOP
 {
-    public partial class GameForm : Form
+    public partial class GameForm : Form, IView, IModelObserver
     {
-        List<Card> test = new List<Card>();
+        IController _formController;
+
         public GameForm()
         {
             InitializeComponent();
-            Deck.DeckInstance.InitDeck(false);
-            test = Deck.DeckInstance.GetCards();
-            asd();
         }
 
-        private async Task asd()
+        public void SetController(IController c)
         {
-            foreach (Card c in test)
-            {
-                pictureBox1.Controls.Clear();
-                pictureBox1.Controls.Add(c);
-                textBox1.Text = c.Value.ToString();
-                textBox2.Text = c.Suit;
-                await Task.Delay(1500);
-            }
+            _formController = c;
+            StartRound();
+        }
+
+        private void StartRound()
+        {
+            _formController.StartRound();
+        }
+
+        public void Display(IModel m, ModelEventArgs e)
+        {
+            cardOne.Controls.Clear();
+            cardOne.Controls.Add(e.hand[0]);
+            cardTwo.Controls.Clear();
+            cardTwo.Controls.Add(e.hand[1]);
+            cardThree.Controls.Clear();
+            cardThree.Controls.Add(e.hand[2]);
+            cardFour.Controls.Clear();
+            cardFour.Controls.Add(e.hand[3]);
+            cardFive.Controls.Clear();
+            cardFive.Controls.Add(e.hand[4]);
         }
     }
 }

@@ -33,8 +33,8 @@ namespace Poker
         {
             _image = image;
             base.ImageLocation = _image;
-            base.Width = 100;
-            base.Height = 185;
+            base.Width = 71;
+            base.Height = 94;
             base.SizeMode = PictureBoxSizeMode.StretchImage;
             _suit = CardSuit();
             _value = CardValue();

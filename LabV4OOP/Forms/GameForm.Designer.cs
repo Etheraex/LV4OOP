@@ -28,45 +28,96 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.cardOne = new System.Windows.Forms.PictureBox();
+            this.txtBoxPoints = new System.Windows.Forms.TextBox();
+            this.cardTwo = new System.Windows.Forms.PictureBox();
+            this.cardThree = new System.Windows.Forms.PictureBox();
+            this.cardFour = new System.Windows.Forms.PictureBox();
+            this.cardFive = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.cardOne)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardTwo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardThree)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardFour)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardFive)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // cardOne
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(118, 71);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 185);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.cardOne.Location = new System.Drawing.Point(12, 331);
+            this.cardOne.Name = "cardOne";
+            this.cardOne.Size = new System.Drawing.Size(71, 94);
+            this.cardOne.TabIndex = 0;
+            this.cardOne.TabStop = false;
             // 
-            // textBox1
+            // txtBoxPoints
             // 
-            this.textBox1.Location = new System.Drawing.Point(328, 71);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtBoxPoints.Location = new System.Drawing.Point(12, 12);
+            this.txtBoxPoints.Name = "txtBoxPoints";
+            this.txtBoxPoints.Size = new System.Drawing.Size(100, 20);
+            this.txtBoxPoints.TabIndex = 1;
             // 
-            // textBox2
+            // cardTwo
             // 
-            this.textBox2.Location = new System.Drawing.Point(328, 106);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 1;
+            this.cardTwo.Location = new System.Drawing.Point(89, 331);
+            this.cardTwo.Name = "cardTwo";
+            this.cardTwo.Size = new System.Drawing.Size(71, 94);
+            this.cardTwo.TabIndex = 0;
+            this.cardTwo.TabStop = false;
             // 
-            // Form1
+            // cardThree
+            // 
+            this.cardThree.Location = new System.Drawing.Point(166, 331);
+            this.cardThree.Name = "cardThree";
+            this.cardThree.Size = new System.Drawing.Size(71, 94);
+            this.cardThree.TabIndex = 0;
+            this.cardThree.TabStop = false;
+            // 
+            // cardFour
+            // 
+            this.cardFour.Location = new System.Drawing.Point(243, 331);
+            this.cardFour.Name = "cardFour";
+            this.cardFour.Size = new System.Drawing.Size(71, 94);
+            this.cardFour.TabIndex = 0;
+            this.cardFour.TabStop = false;
+            // 
+            // cardFive
+            // 
+            this.cardFive.Location = new System.Drawing.Point(320, 331);
+            this.cardFive.Name = "cardFive";
+            this.cardFive.Size = new System.Drawing.Size(71, 94);
+            this.cardFive.TabIndex = 0;
+            this.cardFive.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Location = new System.Drawing.Point(320, 12);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(71, 94);
+            this.pictureBox6.TabIndex = 0;
+            this.pictureBox6.TabStop = false;
+            // 
+            // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(594, 352);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.pictureBox1);
-            this.Name = "Form1";
+            this.ClientSize = new System.Drawing.Size(407, 436);
+            this.Controls.Add(this.txtBoxPoints);
+            this.Controls.Add(this.pictureBox6);
+            this.Controls.Add(this.cardFive);
+            this.Controls.Add(this.cardFour);
+            this.Controls.Add(this.cardThree);
+            this.Controls.Add(this.cardTwo);
+            this.Controls.Add(this.cardOne);
+            this.Name = "GameForm";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardOne)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardTwo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardThree)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardFour)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardFive)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -74,9 +125,13 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.PictureBox cardOne;
+        private System.Windows.Forms.TextBox txtBoxPoints;
+        private System.Windows.Forms.PictureBox cardTwo;
+        private System.Windows.Forms.PictureBox cardThree;
+        private System.Windows.Forms.PictureBox cardFour;
+        private System.Windows.Forms.PictureBox cardFive;
+        private System.Windows.Forms.PictureBox pictureBox6;
     }
 }
 

@@ -62,9 +62,12 @@ namespace Poker
             _deck = randomList;
         }
 
-        public List<Card> GetCards()
+        public List<Card> GetHand()
         {
-            return _deck;
+            List<Card> hand = new List<Card>(5);
+            for (int i = 0; i < 5; i++)
+                hand.Add(_deck[i]);
+            return hand;
         }
 
         public int Count

@@ -11,3 +11,4 @@ C:\Users\Mladen\source\repos\LabV4OOP\LabV4OOP\obj\Debug\LabV4OOP.csproj.CopyCom
 C:\Users\Mladen\source\repos\LabV4OOP\LabV4OOP\obj\Debug\LabV4OOP.exe
 C:\Users\Mladen\source\repos\LabV4OOP\LabV4OOP\obj\Debug\LabV4OOP.pdb
 C:\Users\Mladen\source\repos\LabV4OOP\LabV4OOP\obj\Debug\LabV4OOP.GameForm.resources
+C:\Users\Mladen\source\repos\LabV4OOP\LabV4OOP\obj\Debug\LabV4OOP.PickTypeForm.resources

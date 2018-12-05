@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Poker;
 
 namespace LabV4OOP
 {
@@ -11,6 +12,7 @@ namespace LabV4OOP
     {
         void SubmitHand();
         void StartRound();
+        void Swap(List<Card> toSwap);
     }
 
     public class StandardController : IController
@@ -33,10 +35,19 @@ namespace LabV4OOP
 
         public void SubmitHand()
         {
+            _model.SubmitHand();
+        }
 
+        public void Swap(List<Card> toSwap)
+        {
+            _model.Swap(toSwap);
         }
     }
 
+    /// <summary>
+    /// Texas holdem Controler 
+    /// TODO Later
+    /// </summary>
     public class TexasHoldemController : IController
     {
         IView _view;
@@ -60,6 +71,9 @@ namespace LabV4OOP
 
         }
 
-
+        public void Swap(List<Card> toSwap)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -13,10 +13,12 @@ namespace LabV4OOP
 
     public class ModelEventArgs : EventArgs
     {
+        public int points;
         public List<Card> hand;
-        public ModelEventArgs(List<Card> l)
+        public ModelEventArgs(List<Card> l, int p)
         {
             hand = l;
+            points = p;
         }
     }
 
@@ -29,57 +31,96 @@ namespace LabV4OOP
     {
         void Attach(IModelObserver imo);
         void StartRound();
+        void Swap(List<Card> toSwap);
+        void SubmitHand();
     }
 
     /// <summary>
     /// //////////////////////////////////////////////////
     /// </summary>
     
+
     public class StandardModel : IModel
     {
-        public event ModelHandler<StandardModel> changed;
-        List<Card> hand;
+        private event ModelHandler<StandardModel> _changed;
+        List<Card> _hand;
+        int _currentPoints;
 
         public StandardModel(bool type)
         {
             Deck.DeckInstance.InitDeck(type);
-            hand = Deck.DeckInstance.GetHand();
+            _hand = Deck.DeckInstance.GetHand();
+            _currentPoints = 500;
         }
 
         public void Attach(IModelObserver imo)
         {
-            changed+= new ModelHandler<StandardModel>(imo.Display);
+            _changed += new ModelHandler<StandardModel>(imo.Display);
         }
 
         public void StartRound()
         {
-            changed.Invoke(this, new ModelEventArgs(hand));
+            _changed.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
+        }
+
+        public void Swap(List<Card> toSwap)
+        {
+            foreach (Card c in toSwap)
+                _hand.Remove(c);
+            foreach (Card c in _hand)
+                c.RemoveAction();
+            _hand.AddRange(Deck.DeckInstance.Swap(toSwap));
+            _changed.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
+        }
+
+        public void SubmitHand()
+        {
+            int multiplier = Deck.DeckInstance.WinningHand(_hand);
+            _currentPoints += 10 * multiplier;
+            for(int i = _hand.Count-1; i >= 0; i--)
+            {
+                Deck.DeckInstance.ReturnCard(_hand[i]);
+                _hand.RemoveAt(i);
+            }
+            _hand = Deck.DeckInstance.GetHand();
+            _changed.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
         }
     }
 
     /// <summary>
-    /// ////////////////////////////////////////////////
+    /// Texas holdem model
+    /// TODO later
     /// </summary>
     
     public class TexasHoldemModel : IModel
     {
-        public event ModelHandler<TexasHoldemModel> changed;
-        List<Card> hand;
+        private event ModelHandler<TexasHoldemModel> _changed;
+        List<Card> _hand;
 
         public TexasHoldemModel(bool type)
         {
             Deck.DeckInstance.InitDeck(type);
-            hand = Deck.DeckInstance.GetHand();
+            _hand = Deck.DeckInstance.GetHand();
         }
 
         public void Attach(IModelObserver imo)
         {
-            changed += new ModelHandler<TexasHoldemModel>(imo.Display);
+            _changed += new ModelHandler<TexasHoldemModel>(imo.Display);
         }
 
         public void StartRound()
         {
-            changed.Invoke(this, new ModelEventArgs(hand));
+            _changed.Invoke(this, new ModelEventArgs(_hand, 500));
+        }
+
+        public void Swap(List<Card> toSwap)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SubmitHand()
+        {
+            throw new NotImplementedException();
         }
     }
 }

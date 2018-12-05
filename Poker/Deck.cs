@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Poker
 {
@@ -66,7 +67,10 @@ namespace Poker
         {
             List<Card> hand = new List<Card>(5);
             for (int i = 0; i < 5; i++)
+            {
                 hand.Add(_deck[i]);
+                _deck.RemoveAt(i);
+            }
             return hand;
         }
 
@@ -76,6 +80,95 @@ namespace Poker
             {
                 return _deck.Count;
             }
+        }
+
+        public void ReturnCard(Card c)
+        {
+            c.RemoveAction();
+            _deck.Add(c);
+        }
+
+        public List<Card> Swap(List<Card> toSwap)
+        {
+            List<Card> toReturn = new List<Card>();
+            for (int i = 0; i < toSwap.Count; i++)
+            {
+                toReturn.Add(_deck[i]);
+                _deck.RemoveAt(i);
+            }
+            foreach (Card c in toSwap)
+            {
+                c.RemoveAction();
+                ReturnCard(c);
+            }
+            return toReturn;
+        }
+
+        public int WinningHand(List<Card> _hand)
+        {
+            List<Card> hand = _hand;
+            Card tmp;
+            for (int i = 0; i < hand.Count - 1; i++)
+                if (hand[i].Value > hand[i + 1].Value)
+                {
+                    tmp = hand[i];
+                    hand[i] = hand[i + 1];
+                    hand[i + 1] = tmp;
+                }
+
+            if (Ruleset.RulesetInstance.isStrFlush(hand))
+            {
+                MessageBox.Show("Straight Flush");
+                return 100;
+            }
+            else if (Ruleset.RulesetInstance.isFourOfaKind(hand))
+            {
+                MessageBox.Show("Four of a kind");
+                return 60;
+            }
+            else if (Ruleset.RulesetInstance.isBigBobtail(hand))
+            {
+                MessageBox.Show("Big bobtail");
+                return 40;
+            }
+            else if (Ruleset.RulesetInstance.isFullHouse(hand))
+            {
+                MessageBox.Show("Full house");
+                return 24;
+            }
+            else if (Ruleset.RulesetInstance.isFlush(hand))
+            {
+                MessageBox.Show("Flush");
+                return 16;
+            }
+            else if (Ruleset.RulesetInstance.isStr(hand))
+            {
+                MessageBox.Show("Straight");
+                return 12;
+            }
+            else if (Ruleset.RulesetInstance.isBlaze(hand))
+            {
+                MessageBox.Show("Blaze");
+                return 9;
+            }
+            else if (Ruleset.RulesetInstance.isTreeOfaKind(hand))
+            {
+                MessageBox.Show("Three of a kind");
+                return 6;
+            }
+            else if (Ruleset.RulesetInstance.isTwoPairs(hand))
+            {
+                MessageBox.Show("Two pairs");
+                return 4;
+            }
+            else if (Ruleset.RulesetInstance.isOnePair(hand))
+            {
+                MessageBox.Show("One pair");
+                return 2;
+            }
+            else
+                MessageBox.Show("Nothing");
+            return 0;
         }
 
         private static Deck _deckInstance = null;

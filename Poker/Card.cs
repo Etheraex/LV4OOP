@@ -23,6 +23,7 @@ namespace Poker
         private int _value;
         private String _backGround = "../../../Data/Backgrounds/red.png";
         private String _image;
+        private EventHandler _e;
 
         #region Properties
         public String Suit { get { return _suit.ToString(); } }
@@ -89,6 +90,15 @@ namespace Poker
             return 0;
         }
         #endregion
+        public void AddAction(EventHandler e)
+        {
+            _e = e;
+            base.Click += _e;
+        }
 
+        public void RemoveAction()
+        {
+            base.Click -= _e;
+        }
     }
 }

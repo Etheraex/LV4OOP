@@ -15,6 +15,8 @@ namespace LabV4OOP
         public PickTypeForm()
         {
             InitializeComponent();
+            tx32.Enabled = false;
+            tx52.Enabled = false;
         }
 
         private void std52_Click(object sender, EventArgs e)

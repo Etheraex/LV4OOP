@@ -116,52 +116,52 @@ namespace Poker
                     hand[i + 1] = tmp;
                 }
 
-            if (Ruleset.RulesetInstance.isStrFlush(hand))
+            if (Ruleset.RulesetInstance.StraightFlush(hand))
             {
                 MessageBox.Show("Straight Flush");
                 return 100;
             }
-            else if (Ruleset.RulesetInstance.isFourOfaKind(hand))
+            else if (Ruleset.RulesetInstance.FourOfaKind(hand))
             {
                 MessageBox.Show("Four of a kind");
                 return 60;
             }
-            else if (Ruleset.RulesetInstance.isBigBobtail(hand))
+            else if (Ruleset.RulesetInstance.BigBobtail(hand))
             {
                 MessageBox.Show("Big bobtail");
                 return 40;
             }
-            else if (Ruleset.RulesetInstance.isFullHouse(hand))
+            else if (Ruleset.RulesetInstance.FullHouse(hand))
             {
                 MessageBox.Show("Full house");
                 return 24;
             }
-            else if (Ruleset.RulesetInstance.isFlush(hand))
+            else if (Ruleset.RulesetInstance.Flush(hand))
             {
                 MessageBox.Show("Flush");
                 return 16;
             }
-            else if (Ruleset.RulesetInstance.isStr(hand))
+            else if (Ruleset.RulesetInstance.Straight(hand))
             {
                 MessageBox.Show("Straight");
                 return 12;
             }
-            else if (Ruleset.RulesetInstance.isBlaze(hand))
+            else if (Ruleset.RulesetInstance.Blaze(hand))
             {
                 MessageBox.Show("Blaze");
                 return 9;
             }
-            else if (Ruleset.RulesetInstance.isTreeOfaKind(hand))
+            else if (Ruleset.RulesetInstance.TreeOfaKind(hand))
             {
                 MessageBox.Show("Three of a kind");
                 return 6;
             }
-            else if (Ruleset.RulesetInstance.isTwoPairs(hand))
+            else if (Ruleset.RulesetInstance.TwoPairs(hand))
             {
                 MessageBox.Show("Two pairs");
                 return 4;
             }
-            else if (Ruleset.RulesetInstance.isOnePair(hand))
+            else if (Ruleset.RulesetInstance.OnePair(hand))
             {
                 MessageBox.Show("One pair");
                 return 2;

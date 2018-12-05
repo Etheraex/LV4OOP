@@ -24,15 +24,19 @@ namespace LabV4OOP
 
     public interface IModelObserver
     {
+        void StartRound(bool beginning);
         void Display(IModel m, ModelEventArgs e);
+        void UpdatePoints(IModel m, ModelEventArgs e);
+        void InitialBet();
     }
 
     public interface IModel
     {
         void Attach(IModelObserver imo);
-        void StartRound();
+        void StartRound(bool beginning);
         void Swap(List<Card> toSwap);
         void SubmitHand();
+        void Bet(int bet);
     }
 
     /// <summary>
@@ -42,25 +46,40 @@ namespace LabV4OOP
 
     public class StandardModel : IModel
     {
-        private event ModelHandler<StandardModel> _changed;
+        IModelObserver _imo;
+        private event ModelHandler<StandardModel> _display;
+        private event ModelHandler<StandardModel> _updatePoints;
         List<Card> _hand;
         int _currentPoints;
+        int _bet;
 
         public StandardModel(bool type)
         {
             Deck.DeckInstance.InitDeck(type);
-            _hand = Deck.DeckInstance.GetHand();
-            _currentPoints = 500;
         }
 
         public void Attach(IModelObserver imo)
         {
-            _changed += new ModelHandler<StandardModel>(imo.Display);
+            _imo = imo;
+            _display += new ModelHandler<StandardModel>(imo.Display);
+            _updatePoints += new ModelHandler<StandardModel>(imo.UpdatePoints);
         }
 
-        public void StartRound()
+        public void StartRound(bool beginning)
         {
-            _changed.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
+            if (beginning)
+                _currentPoints = 500;
+            _bet = 0;
+            if(_hand != null)
+                for (int i = _hand.Count - 1; i >= 0; i--)
+                {
+                    Deck.DeckInstance.ReturnCard(_hand[i]);
+                    _hand.RemoveAt(i);
+                }
+            _hand = Deck.DeckInstance.GetHand();
+            _display.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
+            _updatePoints.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
+            _imo.InitialBet();
         }
 
         public void Swap(List<Card> toSwap)
@@ -70,20 +89,21 @@ namespace LabV4OOP
             foreach (Card c in _hand)
                 c.RemoveAction();
             _hand.AddRange(Deck.DeckInstance.Swap(toSwap));
-            _changed.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
+            _display.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
         }
 
         public void SubmitHand()
         {
             int multiplier = Deck.DeckInstance.WinningHand(_hand);
-            _currentPoints += 10 * multiplier;
-            for(int i = _hand.Count-1; i >= 0; i--)
-            {
-                Deck.DeckInstance.ReturnCard(_hand[i]);
-                _hand.RemoveAt(i);
-            }
-            _hand = Deck.DeckInstance.GetHand();
-            _changed.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
+            _currentPoints += _bet * multiplier;
+            _imo.StartRound(false);
+        }
+
+        public void Bet(int bet)
+        {
+            _bet += bet;
+            _currentPoints -= bet;
+            _updatePoints.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
         }
     }
 
@@ -108,7 +128,7 @@ namespace LabV4OOP
             _changed += new ModelHandler<TexasHoldemModel>(imo.Display);
         }
 
-        public void StartRound()
+        public void StartRound(bool beginning)
         {
             _changed.Invoke(this, new ModelEventArgs(_hand, 500));
         }
@@ -119,6 +139,11 @@ namespace LabV4OOP
         }
 
         public void SubmitHand()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Bet(int bet)
         {
             throw new NotImplementedException();
         }

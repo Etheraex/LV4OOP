@@ -10,145 +10,149 @@ namespace Poker
     {
         private Ruleset() { }
 
-        public bool isStrFlush(List<Card> hand)
+        public bool StraightFlush(List<Card> hand)
         {
             if (hand.Count < 5)
                 return false;
-            if (this.isFlush(hand) && this.isStr(hand))
+            if (Flush(hand) && Straight(hand))
                 return true;
             return false;
         }
 
-        public bool isFlush(List<Card> hand)
+        public bool Flush(List<Card> hand)
         {
             if (hand.Count < 5)
                 return false;
-            bool temp = true;
+            bool tmp = true;
             int i = 0;
-            while (temp && i < hand.Count - 1)
+            while (tmp && i < hand.Count - 1)
             {
                 if (hand[i].Suit != hand[++i].Suit)
-                    temp = false;
+                    tmp = false;
             }
-            return temp;
+            return tmp;
         }
 
-        public bool isStr(List<Card> hand)
+        public bool Straight(List<Card> hand)
         {
             if (hand.Count < 5)
                 return false;
-            bool temp = false;
+            bool tmp = false;
             int i = 0;
-            while (!temp && i < hand.Count - 1)
+            while (!tmp && i < hand.Count - 1)
             {
-                temp = strHelper(hand, hand[i++].Value + 1, 0);
+                tmp = StraightHelper(hand, hand[i++].Value + 1, 0);
             }
-            return temp;
+            return tmp;
         }
-        bool strHelper(List<Card> hand, int next, int depth)
+
+        bool StraightHelper(List<Card> hand, int next, int depth)
         {
-            if (hasNumber(hand, next))
+            if (HasNumber(hand, next))
             {
                 if (depth == hand.Count - 2)
                     return true;
-                return strHelper(hand, next + 1, ++depth);
+                return StraightHelper(hand, next + 1, ++depth);
             }
             return false;
         }
-        bool hasNumber(List<Card> hand, int num)
+
+        bool HasNumber(List<Card> hand, int number)
         {
             foreach (Card c in hand)
             {
-                if (c.Value == num)
+                if (c.Value == number)
                     return true;
             }
             return false;
         }
-        public bool isBigBobtail(List<Card> hand)
-        {
 
-            if (hand.Count < 4)
-                return false;
-
-            List<Card> tempRuka;
-            bool temp = false;
-            int i = 0;
-            while (!temp && i < hand.Count)
-            {
-                tempRuka = new List<Card>(hand);
-                tempRuka.RemoveAt(i++);
-                if (isFlush(tempRuka) && isStr(tempRuka))
-                    temp = true;
-            }
-            return temp;
-        }
-        public bool isFourOfaKind(List<Card> hand)
+        public bool BigBobtail(List<Card> hand)
         {
             if (hand.Count < 4)
                 return false;
-            bool temp = false;
+
+            List<Card> tmpHand;
+            bool tmp = false;
             int i = 0;
-            while (!temp && i < hand.Count)
+            while (!tmp && i < hand.Count)
             {
-                temp = this.fourHelper(hand, i++);
+                tmpHand = new List<Card>(hand);
+                tmpHand.RemoveAt(i++);
+                if (Flush(tmpHand) && Straight(tmpHand))
+                    tmp = true;
             }
-            return temp;
+            return tmp;
         }
 
-        public bool fourHelper(List<Card> hand, int index) // proverava dali ima 4 iste bez karte sa prosledjenim indexom
+        public bool FourOfaKind(List<Card> hand)
         {
-            bool temp = true;
+            if (hand.Count < 4)
+                return false;
+            bool tmp = false;
             int i = 0;
-            List<Card> tempRuka = new List<Card>(hand);
-            tempRuka.RemoveAt(index);
-            while (temp && i < tempRuka.Count - 1)
+            while (!tmp && i < hand.Count)
             {
-                if (tempRuka[i].Value != tempRuka[++i].Value)
-                    temp = false;
+                tmp = this.FourHelper(hand, i++);
             }
-            return temp;
+            return tmp;
         }
 
-        public bool isTreeOfaKind(List<Card> hand)
+        public bool FourHelper(List<Card> hand, int index)
+        {
+            bool tmp = true;
+            int i = 0;
+            List<Card> tmpHand = new List<Card>(hand);
+            tmpHand.RemoveAt(index);
+            while (tmp && i < tmpHand.Count - 1)
+            {
+                if (tmpHand[i].Value != tmpHand[++i].Value)
+                    tmp = false;
+            }
+            return tmp;
+        }
+
+        public bool TreeOfaKind(List<Card> hand)
         {
             if (hand.Count < 3)
                 return false;
-            bool temp = false;
+            bool tmp = false;
             int i = 0;
-            while (!temp && i < hand.Count)
+            while (!tmp && i < hand.Count)
             {
                 int count = 0;
-                foreach (Card karta in hand)
+                foreach (Card card in hand)
                 {
-                    if (karta.Value == hand[i].Value)
+                    if (card.Value == hand[i].Value)
                         count++;
                 }
                 if (count == 3)
-                    temp = true;
+                    tmp = true;
                 i++;
             }
-            return temp;
+            return tmp;
         }
 
-        public bool isOnePair(List<Card> hand)
+        public bool OnePair(List<Card> hand)
         {
-            bool temp = false;
+            bool tmp = false;
             int i = 0;
-            while (!temp && i < hand.Count)
+            while (!tmp && i < hand.Count)
             {
                 int count = 0;
-                foreach (Card karta in hand)
+                foreach (Card card in hand)
                 {
-                    if (karta.Value == hand[i].Value)
+                    if (card.Value == hand[i].Value)
                         count++;
                 }
                 if (count == 2)
-                    temp = true;
+                    tmp = true;
                 i++;
             }
-            return temp;
+            return tmp;
         }
-        public bool isTwoPairs(List<Card> hand)
+
+        public bool TwoPairs(List<Card> hand)
         {
             if (hand.Count < 4)
                 return false;
@@ -157,9 +161,9 @@ namespace Poker
             while (i < hand.Count)
             {
                 int count = 0;
-                foreach (Card karta in hand)
+                foreach (Card card in hand)
                 {
-                    if (karta.Value == hand[i].Value)
+                    if (card.Value == hand[i].Value)
                         count++;
                 }
                 if (count == 2)
@@ -170,22 +174,24 @@ namespace Poker
                 return true;
             return false;
         }
-        public bool isBlaze(List<Card> hand)
+
+        public bool Blaze(List<Card> hand)
         {
             if (hand.Count < 5)
                 return false;
-            bool temp = true;
+            bool tmp = true;
             int i = 0;
-            while (temp && i < hand.Count)
+            while (tmp && i < hand.Count)
             {
                 if (hand[i++].Value < 12)
-                    temp = false;
+                    tmp = false;
             }
-            return temp;
+            return tmp;
         }
-        public bool isFullHouse(List<Card> hand)
+
+        public bool FullHouse(List<Card> hand)
         {
-            if (isTreeOfaKind(hand))
+            if (TreeOfaKind(hand))
             {
                 if (hand[0].Value == hand[1].Value && hand[3].Value == hand[4].Value)
                     return true;

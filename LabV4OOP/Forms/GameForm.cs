@@ -16,6 +16,7 @@ namespace LabV4OOP
         IController _formController;
         List<Card> _hand;
         List<Card> toSwap = new List<Card>(3);
+        int _bet;
 
         public GameForm()
         {
@@ -25,18 +26,21 @@ namespace LabV4OOP
         public void SetController(IController c)
         {
             _formController = c;
-            StartRound();
+            _formController.StartRound(true);
+            _bet = 100;
+            UpdateBet();
         }
 
-        private void StartRound()
+        public void StartRound(bool beginning)
         {
-            _formController.StartRound();
+            _formController.StartRound(beginning);
+            _bet = 100;
+            UpdateBet();
         }
 
         public void Display(IModel m, ModelEventArgs e)
         {
             _hand = e.hand;
-            txtBoxPoints.Text = e.points.ToString();
             p1.BackColor = SystemColors.Control;
             p2.BackColor = SystemColors.Control;
             p3.BackColor = SystemColors.Control;
@@ -145,6 +149,47 @@ namespace LabV4OOP
         {
             _formController.SubmitHand();
             btnSwap.Enabled = true;
+        }
+
+        private void bet_Click(object sender, EventArgs e)
+        {
+            _bet += int.Parse(txtBoxBet.Text);
+            _formController.Bet(int.Parse(txtBoxBet.Text));
+            UpdateBet();
+        }
+
+        public void UpdatePoints(IModel m, ModelEventArgs e)
+        {
+            txtBoxPoints.Text = e.points.ToString();
+        }
+
+        public void InitialBet()
+        {
+            int tmp = int.Parse(txtBoxPoints.Text);
+            MessageBox.Show("Current balance: "+ tmp.ToString()+" initial bet: 100");
+            if (tmp > 100)
+            {
+                _formController.Bet(100);
+            }
+            else
+            {
+                GameOverForm gof = new GameOverForm();
+                DialogResult dr = gof.ShowDialog();
+                if (dr == DialogResult.Retry)
+                    StartRound(true);
+            }
+        }
+
+        private void btnAll_Click(object sender, EventArgs e)
+        {
+            _bet += int.Parse(txtBoxPoints.Text);
+            _formController.Bet(int.Parse(txtBoxPoints.Text));
+            UpdateBet();
+        }
+
+        private void UpdateBet()
+        {
+            lblBetMade.Text = _bet.ToString();
         }
     }
 }

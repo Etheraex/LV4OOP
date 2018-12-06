@@ -27,7 +27,7 @@ namespace LabV4OOP
 
         private void std32_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.No;
             this.Close();
         }
 

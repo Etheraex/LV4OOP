@@ -193,7 +193,7 @@ namespace Poker
         {
             if (TreeOfaKind(hand))
             {
-                if (hand[0].Value == hand[1].Value && hand[3].Value == hand[4].Value)
+                if ((hand[0].Value == hand[1].Value) && (hand[3].Value == hand[4].Value))
                     return true;
             }
             return false;

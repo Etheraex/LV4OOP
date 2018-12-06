@@ -71,6 +71,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Name = "GameOverForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GameOverForm";
             this.ResumeLayout(false);
             this.PerformLayout();

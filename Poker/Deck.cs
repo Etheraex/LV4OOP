@@ -109,12 +109,13 @@ namespace Poker
             List<Card> hand = _hand;
             Card tmp;
             for (int i = 0; i < hand.Count - 1; i++)
-                if (hand[i].Value > hand[i + 1].Value)
-                {
-                    tmp = hand[i];
-                    hand[i] = hand[i + 1];
-                    hand[i + 1] = tmp;
-                }
+                for (int j = 0; j < hand.Count - i - 1; j++)
+                    if (hand[j].Value > hand[j + 1].Value)
+                    {
+                        tmp = hand[j];
+                        hand[j] = hand[j + 1];
+                        hand[j + 1] = tmp;
+                    }
 
             if (Ruleset.RulesetInstance.StraightFlush(hand))
             {

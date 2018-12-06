@@ -84,6 +84,7 @@
             this.Controls.Add(this.std32);
             this.Controls.Add(this.std52);
             this.Name = "PickTypeForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PickTypeForm";
             this.ResumeLayout(false);
 

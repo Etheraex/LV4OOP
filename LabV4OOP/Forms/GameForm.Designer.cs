@@ -236,6 +236,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.OliveDrab;
             this.ClientSize = new System.Drawing.Size(425, 299);
             this.Controls.Add(this.lblBetMade);
             this.Controls.Add(this.label3);
@@ -253,7 +254,8 @@
             this.Controls.Add(this.p1);
             this.Controls.Add(this.txtBoxPoints);
             this.Name = "GameForm";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Poker";
             ((System.ComponentModel.ISupportInitialize)(this.cardOne)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardTwo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardThree)).EndInit();

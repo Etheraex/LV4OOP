@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -29,6 +30,11 @@ namespace Poker
         public String Suit { get { return _suit.ToString(); } }
         public int Value { get { return _value; } }
         #endregion
+
+        public bool IsEqual(Card c)
+        {
+            return ((_value == c.Value) && (Suit == c.Suit)) ? true : false;
+        }
 
         public Card(String image)
         {

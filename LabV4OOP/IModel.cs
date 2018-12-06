@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,9 +35,10 @@ namespace LabV4OOP
     {
         void Attach(IModelObserver imo);
         void StartRound(bool beginning);
-        void Swap(List<Card> toSwap);
         void SubmitHand();
         void Bet(int bet);
+        void SetPanels(List<Panel> panels);
+        void Swap();
     }
 
     /// <summary>
@@ -50,9 +52,11 @@ namespace LabV4OOP
         private event ModelHandler<StandardModel> _display;
         private event ModelHandler<StandardModel> _updatePoints;
         List<Card> _hand;
+        List<Card> _toSwap;
+        List<Panel> _panels;
         int _currentPoints;
         int _bet;
-
+        
         public StandardModel(bool type)
         {
             Deck.DeckInstance.InitDeck(type);
@@ -67,6 +71,7 @@ namespace LabV4OOP
 
         public void StartRound(bool beginning)
         {
+            _toSwap = new List<Card>(3);
             if (beginning)
                 _currentPoints = 500;
             _bet = 0;
@@ -77,19 +82,10 @@ namespace LabV4OOP
                     _hand.RemoveAt(i);
                 }
             _hand = Deck.DeckInstance.GetHand();
+            SetAction();
             _display.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
             _updatePoints.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
             _imo.InitialBet();
-        }
-
-        public void Swap(List<Card> toSwap)
-        {
-            foreach (Card c in toSwap)
-                _hand.Remove(c);
-            foreach (Card c in _hand)
-                c.RemoveAction();
-            _hand.AddRange(Deck.DeckInstance.Swap(toSwap));
-            _display.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
         }
 
         public void SubmitHand()
@@ -104,6 +100,54 @@ namespace LabV4OOP
             _bet += bet;
             _currentPoints -= bet;
             _updatePoints.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
+        }
+
+        public void SetPanels(List<Panel> panels)
+        {
+            _panels = panels;
+        }
+
+        private void SetAction()
+        {
+            foreach (Card c in _hand)
+                c.AddAction(card_Click);
+        }
+
+        private void card_Click(object sender, EventArgs e)
+        {
+            Card tmp = sender as Card;
+            int i = 0;
+            for (; i < _hand.Count; i++)
+                if (_hand[i].IsEqual(tmp))
+                    break;
+
+            if (_panels[i].BackColor == Color.Red)
+            {
+                _toSwap.Remove(_hand[i]);
+                _panels[i].BackColor = Color.OliveDrab;
+            }
+            else if (_toSwap.Count < 3)
+            {
+                _panels[i].BackColor = Color.Red;
+                _toSwap.Add(_hand[i]);
+            }
+        }
+
+        public void Swap()
+        {
+            if (_toSwap.Count != 0)
+            {
+                foreach (Card c in _toSwap)
+                {
+                    Deck.DeckInstance.ReturnCard(c);
+                    _hand.Remove(c);
+                }
+                foreach (Card c in _hand)
+                    c.RemoveAction();
+                _hand.AddRange(Deck.DeckInstance.Swap(_toSwap));
+                _display.Invoke(this, new ModelEventArgs(_hand, _currentPoints));
+                _toSwap = new List<Card>(3);
+            }
         }
     }
 
@@ -133,17 +177,22 @@ namespace LabV4OOP
             _changed.Invoke(this, new ModelEventArgs(_hand, 500));
         }
 
-        public void Swap(List<Card> toSwap)
-        {
-            throw new NotImplementedException();
-        }
-
         public void SubmitHand()
         {
             throw new NotImplementedException();
         }
 
         public void Bet(int bet)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetPanels(List<Panel> panels)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Swap()
         {
             throw new NotImplementedException();
         }

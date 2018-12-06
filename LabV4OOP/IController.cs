@@ -12,8 +12,9 @@ namespace LabV4OOP
     {
         void SubmitHand();
         void StartRound(bool beginning);
-        void Swap(List<Card> toSwap);
+        void Swap();
         void Bet(int bet);
+        void SetPanels(List<Panel> p);
     }
 
     public class StandardController : IController
@@ -34,6 +35,11 @@ namespace LabV4OOP
             _model.Bet(bet);
         }
 
+        public void SetPanels(List<Panel> p)
+        {
+            _model.SetPanels(p);
+        }
+
         public void StartRound(bool beginning)
         {
             _model.StartRound(beginning);
@@ -44,9 +50,9 @@ namespace LabV4OOP
             _model.SubmitHand();
         }
 
-        public void Swap(List<Card> toSwap)
+        public void Swap()
         {
-            _model.Swap(toSwap);
+            _model.Swap();
         }
     }
 
@@ -72,6 +78,11 @@ namespace LabV4OOP
             throw new NotImplementedException();
         }
 
+        public void SetPanels(List<Panel> p)
+        {
+            throw new NotImplementedException();
+        }
+
         public void StartRound(bool beginning)
         {
             _model.StartRound(beginning);
@@ -82,7 +93,7 @@ namespace LabV4OOP
             throw new NotImplementedException();
         }
 
-        public void Swap(List<Card> toSwap)
+        public void Swap()
         {
             throw new NotImplementedException();
         }

@@ -10,6 +10,153 @@ namespace Poker
     {
         private Ruleset() { }
 
+        public int GetResult(List<Card> hand, int type)
+        {
+            // Standard and Texas
+            if (StraightFlush(hand))
+            {
+                if (type == 1)
+                    return 100; //Standard
+                else
+                    return 150; //Texas
+            }
+
+            // Standard and Texas
+            if (FourOfaKind(hand))
+            {
+                if (type == 1)
+                    return 60;  //Standard
+                else
+                    return 90;  //Texas
+            }
+
+            //Only Texas
+            if (type == 0 && BigDog(hand))
+                return 60;
+
+            // Only standard
+            if (type==1 && BigBobtail(hand))
+                return 40;
+
+            // Only standard
+            if (type == 1 && FullHouse(hand))
+                return 24;
+
+            // Standard and Texas
+            if (Flush(hand))
+            {
+                if (type == 1)
+                    return 16;  //Standard
+                else
+                    return 40;  //Texas
+            }
+
+            // Standard and Texas
+            if (Straight(hand))
+            {
+                if (type == 1)
+                    return 12;  //Standard
+                else
+                    return 26;  //Texas
+            }
+
+            //Only Texas
+            if (type == 0 && BobtailStraight(hand))
+                return 18;
+
+            //Only Texas
+            if (type == 0 && LittleDog(hand))
+                return 12;
+
+            // Only standard
+            if (type == 1 && Blaze(hand))
+                return 9;
+
+            // Standard and Texas
+            if (TreeOfaKind(hand))
+            {
+                if (type == 1)
+                    return 6;  //Standard
+                else
+                    return 8;  //Texas
+            }
+
+            // Standard and Texas
+            if (TwoPairs(hand))
+            {
+                if (type == 1)
+                    return 4;  //Standard
+                else
+                    return 5;  //Texas
+            }
+
+            // Standard and Texas
+            if (OnePair(hand))
+            {
+                if (type == 1)
+                    return 2;  //Standard
+                else
+                    return 1;  //Texas
+            }
+
+            return 0;
+        }
+
+        private List<Card> Sort(List<Card> hand)
+        {
+            Card tmp;
+            for (int i = 0; i < hand.Count - 1; i++)
+                for (int j = 0; j < hand.Count - i - 1; j++)
+                    if (hand[j].Value > hand[j + 1].Value)
+                    {
+                        tmp = hand[j];
+                        hand[j] = hand[j + 1];
+                        hand[j + 1] = tmp;
+                    }
+            return hand;
+        }
+
+        private bool BobtailStraight(List<Card> hand)
+        {
+            if (hand[0].Value < hand[1].Value && hand[1].Value < hand[2].Value && hand[2].Value < hand[3].Value)
+                return true;
+            if (hand[1].Value < hand[2].Value && hand[2].Value < hand[3].Value && hand[3].Value < hand[4].Value)
+                return true;
+            return false;
+        }
+
+        private bool BigDog(List<Card> hand)
+        {
+            bool high = false;
+            bool low = false;
+            foreach (Card c in hand)
+            {
+                if (c.Value == 9)
+                    low = true;
+                else if (c.Value == 11)
+                    high = true;
+            }
+            if (low && high && hand[0].Value < hand[1].Value && hand[1].Value < hand[2].Value && hand[2].Value < hand[3].Value && hand[3].Value < hand[4].Value)
+                return true;
+            return false;
+        }
+
+        private bool LittleDog(List<Card> hand)
+        {
+            bool high = false;
+            bool low = false;
+            foreach (Card c in hand)
+            {
+                if (c.Value == 2)
+                    low = true;
+                else if (c.Value == 7)
+                    high = true;
+            }
+            if (low && high && hand[0].Value < hand[1].Value && hand[1].Value < hand[2].Value && hand[2].Value < hand[3].Value && hand[3].Value < hand[4].Value)
+                return true;
+            return false;
+        }
+
         public bool StraightFlush(List<Card> hand)
         {
             if (hand.Count < 5)
@@ -35,6 +182,7 @@ namespace Poker
 
         public bool Straight(List<Card> hand)
         {
+            hand = Sort(hand);
             if (hand.Count < 5)
                 return false;
             bool tmp = false;

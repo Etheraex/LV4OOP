@@ -48,6 +48,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblBetMade = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblLastHand = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cardOne)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardTwo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardThree)).BeginInit();
@@ -232,12 +234,32 @@
             this.lblBetMade.Size = new System.Drawing.Size(0, 18);
             this.lblBetMade.TabIndex = 9;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(23, 17);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(80, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Poslednja ruka:";
+            // 
+            // lblLastHand
+            // 
+            this.lblLastHand.AutoSize = true;
+            this.lblLastHand.Location = new System.Drawing.Point(109, 17);
+            this.lblLastHand.Name = "lblLastHand";
+            this.lblLastHand.Size = new System.Drawing.Size(35, 13);
+            this.lblLastHand.TabIndex = 10;
+            this.lblLastHand.Text = "label4";
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OliveDrab;
             this.ClientSize = new System.Drawing.Size(425, 299);
+            this.Controls.Add(this.lblLastHand);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.lblBetMade);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -293,6 +315,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblBetMade;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblLastHand;
     }
 }
 

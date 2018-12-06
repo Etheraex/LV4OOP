@@ -30,12 +30,16 @@ namespace LabV4OOP
         {
             _formController = c;
             StartRound(true);
+            if (c.GetType() == typeof(TexasHoldemController))
+                btnSwap.Visible = false;
         }
 
         public void StartRound(bool beginning)
         {
             _formController.SetPanels(_panels);
             _formController.StartRound(beginning);
+            if (beginning)
+                lblLastHand.Text = "";
             lblBetMade.Text = "0";
             UpdateBet(100);
         }
@@ -90,8 +94,8 @@ namespace LabV4OOP
         public void InitialBet()
         {
             int tmp = int.Parse(txtBoxPoints.Text);
-            MessageBox.Show("Current balance: "+ tmp.ToString()+" initial bet: 100");
-            if (tmp > 100)
+            MessageBox.Show("Current balance: " + tmp.ToString() + " initial bet: 100");
+            if (tmp >= 100)
             {
                 _formController.Bet(100);
             }
@@ -104,6 +108,16 @@ namespace LabV4OOP
             }
         }
 
+        public bool PenaltyBet(int x)
+        {
+            if (x > int.Parse(txtBoxPoints.Text))
+                return false;
+
+            _formController.Bet(x);
+            UpdateBet(x);
+            return true;
+        }
+
         private void btnAll_Click(object sender, EventArgs e)
         {
             UpdateBet(int.Parse(txtBoxPoints.Text));
@@ -113,6 +127,11 @@ namespace LabV4OOP
         private void UpdateBet(int bet)
         {
             lblBetMade.Text = (int.Parse(lblBetMade.Text) + bet).ToString();
+        }
+
+        public void UpdateMessage(IModel m, MessageEventArgs e)
+        {
+            lblLastHand.Text = e.Message;
         }
     }
 }

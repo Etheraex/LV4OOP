@@ -75,12 +75,12 @@ namespace LabV4OOP
 
         public void Bet(int bet)
         {
-            throw new NotImplementedException();
+            _model.Bet(bet);
         }
 
         public void SetPanels(List<Panel> p)
         {
-            throw new NotImplementedException();
+            _model.SetPanels(p);
         }
 
         public void StartRound(bool beginning)
@@ -90,12 +90,12 @@ namespace LabV4OOP
 
         public void SubmitHand()
         {
-            throw new NotImplementedException();
+            _model.SubmitHand();
         }
 
         public void Swap()
         {
-            throw new NotImplementedException();
+            _model.Swap();
         }
     }
 }

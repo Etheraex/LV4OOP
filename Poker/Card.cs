@@ -106,5 +106,15 @@ namespace Poker
         {
             base.Click -= _e;
         }
+
+        public void HideCard()
+        {
+            base.ImageLocation = _backGround;
+        }
+
+        public void DisplayCard()
+        {
+            base.ImageLocation = _image;
+        }
     }
 }

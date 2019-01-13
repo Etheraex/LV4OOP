@@ -30,7 +30,7 @@ namespace Poker
                     return 90;  //Texas
             }
 
-            //Only Texas
+            // Only Texas
             if (type == 0 && BigDog(hand))
                 return 60;
 

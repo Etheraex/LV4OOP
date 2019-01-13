@@ -6,8 +6,5 @@ using System.Threading.Tasks;
 
 namespace LabV4OOP
 {
-    public interface IView
-    {
-        void SetController(Controller c);
-    }
+    public interface IView { void SetController(Controller c); }
 }

@@ -124,6 +124,11 @@ namespace LabV4OOP
             _formController.Bet(int.Parse(txtBoxPoints.Text));
         }
 
+        public void ResetBet()
+        {
+            lblBetMade.Text = "100";
+        }
+
         private void UpdateBet(int bet)
         {
             lblBetMade.Text = (int.Parse(lblBetMade.Text) + bet).ToString();

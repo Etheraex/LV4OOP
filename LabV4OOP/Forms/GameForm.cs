@@ -13,7 +13,7 @@ namespace LabV4OOP
 {
     public partial class GameForm : Form, IView, IModelObserver
     {
-        IController _formController;
+        Controller _formController;
         List<Panel> _panels = new List<Panel>(5);
 
         public GameForm()
@@ -26,7 +26,7 @@ namespace LabV4OOP
             _panels.Add(p5);
         }
 
-        public void SetController(IController c)
+        public void SetController(Controller c)
         {
             _formController = c;
             StartRound(true);
@@ -44,7 +44,7 @@ namespace LabV4OOP
             UpdateBet(100);
         }
 
-        public void Display(IModel m, ModelEventArgs e)
+        public void Display(Model m, ModelEventArgs e)
         {
             p1.BackColor = Color.OliveDrab;
             p2.BackColor = Color.OliveDrab;
@@ -86,7 +86,7 @@ namespace LabV4OOP
             _formController.Bet(int.Parse(txtBoxBet.Text));
         }
 
-        public void UpdatePoints(IModel m, ModelEventArgs e)
+        public void UpdatePoints(Model m, ModelEventArgs e)
         {
             txtBoxPoints.Text = e.points.ToString();
         }
@@ -129,7 +129,7 @@ namespace LabV4OOP
             lblBetMade.Text = (int.Parse(lblBetMade.Text) + bet).ToString();
         }
 
-        public void UpdateMessage(IModel m, MessageEventArgs e)
+        public void UpdateMessage(Model m, MessageEventArgs e)
         {
             lblLastHand.Text = e.Message;
         }

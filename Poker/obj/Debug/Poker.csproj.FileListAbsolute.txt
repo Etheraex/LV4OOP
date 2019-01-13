@@ -4,3 +4,9 @@ C:\Users\Mladen\source\repos\LabV4OOP\Poker\obj\Debug\Poker.csprojAssemblyRefere
 C:\Users\Mladen\source\repos\LabV4OOP\Poker\obj\Debug\Poker.csproj.CoreCompileInputs.cache
 C:\Users\Mladen\source\repos\LabV4OOP\Poker\obj\Debug\Poker.dll
 C:\Users\Mladen\source\repos\LabV4OOP\Poker\obj\Debug\Poker.pdb
+C:\Users\Mladen\Desktop\Nadoknada\LV4OOP\Poker\bin\Debug\Poker.dll
+C:\Users\Mladen\Desktop\Nadoknada\LV4OOP\Poker\bin\Debug\Poker.pdb
+C:\Users\Mladen\Desktop\Nadoknada\LV4OOP\Poker\obj\Debug\Poker.csprojAssemblyReference.cache
+C:\Users\Mladen\Desktop\Nadoknada\LV4OOP\Poker\obj\Debug\Poker.csproj.CoreCompileInputs.cache
+C:\Users\Mladen\Desktop\Nadoknada\LV4OOP\Poker\obj\Debug\Poker.dll
+C:\Users\Mladen\Desktop\Nadoknada\LV4OOP\Poker\obj\Debug\Poker.pdb

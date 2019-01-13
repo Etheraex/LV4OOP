@@ -16,7 +16,6 @@ namespace Poker
         // French = false
         bool _type;
 
-
         private Deck() { }
 
         private void LoadDeck()

@@ -20,28 +20,28 @@ namespace LabV4OOP
             DialogResult dr = pick.ShowDialog();
 
             GameForm gameView = new GameForm();
-            IModel gameModel;
-            IController gameController;
+            Controller gameController;
+            Model gameModel;
             bool start = false;
             switch (dr)
             {
                 case DialogResult.OK:
-                    gameModel = new StandardModel(true);
+                    gameModel = new StandardModel();
                     gameController = new StandardController(gameView, gameModel);
                     start = true;
                     break;
                 case DialogResult.No:
-                    gameModel = new StandardModel(false);
+                    gameModel = new FrenchModel();
                     gameController = new StandardController(gameView, gameModel);
                     start = true;
                     break;
                 case DialogResult.Retry:
-                    gameModel = new TexasHoldemModel(true);
+                    gameModel = new StandardModel();
                     gameController = new TexasHoldemController(gameView, gameModel);
                     start = true;
                     break;
                 case DialogResult.Yes:
-                    gameModel = new TexasHoldemModel(false);
+                    gameModel = new FrenchModel();
                     gameController = new TexasHoldemController(gameView, gameModel);
                     start = true;
                     break;

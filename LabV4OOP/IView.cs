@@ -8,6 +8,6 @@ namespace LabV4OOP
 {
     public interface IView
     {
-        void SetController(IController c);
+        void SetController(Controller c);
     }
 }

@@ -119,9 +119,9 @@ namespace Poker
         private bool BobtailStraight(List<Card> hand)
         {
             if (hand[0].Value < hand[1].Value && hand[1].Value < hand[2].Value && hand[2].Value < hand[3].Value)
-                return true;
+                return false;
             if (hand[1].Value < hand[2].Value && hand[2].Value < hand[3].Value && hand[3].Value < hand[4].Value)
-                return true;
+                return false;
             return false;
         }
 
@@ -153,7 +153,7 @@ namespace Poker
                     high = true;
             }
             if (low && high && hand[0].Value < hand[1].Value && hand[1].Value < hand[2].Value && hand[2].Value < hand[3].Value && hand[3].Value < hand[4].Value)
-                return true;
+                return false;
             return false;
         }
 

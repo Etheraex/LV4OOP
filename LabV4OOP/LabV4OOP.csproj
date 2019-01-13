@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller.cs" />
     <Compile Include="Forms\GameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,15 +59,14 @@
     <Compile Include="Forms\GameOverForm.Designer.cs">
       <DependentUpon>GameOverForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="IController.cs" />
-    <Compile Include="IModel.cs" />
-    <Compile Include="IView.cs" />
     <Compile Include="Forms\PickTypeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\PickTypeForm.Designer.cs">
       <DependentUpon>PickTypeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IView.cs" />
+    <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\GameForm.resx">

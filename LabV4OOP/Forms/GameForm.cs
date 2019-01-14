@@ -84,6 +84,7 @@ namespace LabV4OOP
         {
             UpdateBet(int.Parse(txtBoxBet.Text));
             _formController.Bet(int.Parse(txtBoxBet.Text));
+            txtBoxBet.Text = "";
         }
 
         public void UpdatePoints(Model m, ModelEventArgs e)
